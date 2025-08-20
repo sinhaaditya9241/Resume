@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Animation Classes --- */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Staggered animation delays */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+
+        /* --- Enhanced Hover Effects --- */
+        .linkedin-link, .gemini-button {
+            transition: all 0.3s ease;
+        }
+        .linkedin-link:hover, .gemini-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .profile-photo-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-photo-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .skill-tag-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .skill-tag-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Class to hide elements before animation starts */
+        .invisible-for-animation {
+            opacity: 0;
+        }
+        
+        /* Modal Styles */
+        #geminiModal.hidden {
+            display: none;
+        }
+        
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8 max-w-4xl">
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <!-- Header Section -->
+            <header class="bg-blue-600 text-white p-8 md:p-12 animate-fade-in invisible-for-animation">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <!-- Profile Photo -->
+                    <img 
+                        src="images/my_photo.jpg" 
+                        alt="Aditya's Profile Photo" 
+                        class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover profile-photo-hover"
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/E2E8F0/4A5568?text=Photo';"
+                    >
+                    <!-- Name and Title -->
+                    <div class="text-center md:text-left">
+                        <h1 id="resume-name" class="text-4xl md:text-5xl font-bold tracking-tight">Aditya</h1>
+                        <p id="resume-title" class="text-xl md:text-2xl mt-2 text-blue-200">Aspiring Financal Analysts  </p>
+                        <!-- Contact Info -->
+                        <div class="flex justify-center md:justify-start flex-wrap gap-x-6 gap-y-2 mt-4 text-sm">
+                            <span class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                kraditya9241@gmail.com
+                            </span>
+                            <span class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                +91 9241551201
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="p-8 md:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Left Column -->
+                <div class="lg:col-span-2">
+                    <!-- About Me -->
+                    <section id="resume-about" class="animate-fade-in invisible-for-animation delay-1">
+                        <h2 class="text-2xl font-bold text-blue-600 border-b-2 border-blue-200 pb-2 mb-4">About Me</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Hi, I’m Aditya Sinha, an undergraduate at IIT Patna pursuing a B.S. in Computer Science and Data Analytics. I’m passionate about blending finance, technology, and data — from coding in C++ and Python to analyzing markets and building projects around trading, analytics, and research.
+
+Currently, I’m preparing for the CFA Program and certifications like NISM/NCFM to deepen my knowledge in investments and portfolio management. My goal is to build a career at the intersection of quantitative finance and technology, contributing to innovative solutions in fintech, trading, and research.
+                        </p>
+                    </section>
+
+                    <!-- Projects -->
+                    <section id="resume-projects" class="mt-10 animate-fade-in invisible-for-animation delay-2">
+                        <h2 class="text-2xl font-bold text-blue-600 border-b-2 border-blue-200 pb-2 mb-6">Projects</h2>
+                        <div class="space-y-6">
+                            <!-- Project 1 -->
+                            <div class="flex" style="animation: slideInLeft 0.5s 0.8s ease-out forwards; opacity: 0;">
+                                <div class="w-1/4 text-sm text-gray-600">
+                                    <p>2025</p>
+                                    <p class="font-medium">C++, Python, SQL</p>
+                                </div>
+                                <div class="w-3/4 pl-6 border-l-2 border-gray-200">
+                                    <h3 class="font-semibold text-lg">Zcash Portfolio Manager</h3>
+                                    <p class="mt-1 text-gray-700">Developed a comprehensive portfolio manager for zcash, analyzing and optimizing investments with a focus on risk management and growth.</p>
+                                </div>
+                            </div>
+                            <!-- Project 2 -->
+                            <div class="flex" style="animation: slideInLeft 0.5s 1s ease-out forwards; opacity: 0;">
+                                <div class="w-1/4 text-sm text-gray-600">
+                                    <p>2025</p>
+                                    <p class="font-medium">C++, Python, SQL</p>  
+                                </div>
+                                <div class="w-3/4 pl-6 border-l-2 border-gray-200">
+                                    <h3 class="font-semibold text-lg">Crypto Portfolio Manager</h3>
+                                    <p class="mt-1 text-gray-700">Created a portfolio manager for crypto assets, analyzing and optimizing investments with a focus on risk management and growth.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column (Sidebar) -->
+                <div class="lg:col-span-1">
+                    <!-- Gemini Feature Button -->
+                    <section class="mb-4 animate-fade-in invisible-for-animation delay-3">
+                        <button id="openGeminiModal" class="gemini-button bg-purple-600 text-white font-bold py-3 px-4 rounded-lg w-full flex items-center justify-center shadow-lg">
+                            ✨ Generate Cover Letter
+                        </button>
+                    </section>
+
+                    <!-- LinkedIn Link Feature -->
+                    <section class="mb-8 animate-fade-in invisible-for-animation delay-3">
+                         <a href="https://www.linkedin.com/in/aditya-405437360/" target="_blank" rel="noopener noreferrer" class="linkedin-link bg-blue-500 text-white font-bold py-3 px-4 rounded-lg w-full flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg>
+                            View LinkedIn Profile
+                        </a>
+                    </section>
+                    
+                    <!-- Skills -->
+                    <section id="resume-skills" class="animate-fade-in invisible-for-animation delay-3">
+                        <h2 class="text-xl font-bold text-blue-600 border-b-2 border-blue-200 pb-2 mb-4">Skills</h2>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">Python</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">C++</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">SQL</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">HTML</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">CSS</span>
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">JavaScript</span>
+                            <span class="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full skill-tag-hover">Git & GitHub</span>
+                        </div>
+                    </section>
+
+                    <!-- Education -->
+                    <section class="mt-10 animate-fade-in invisible-for-animation delay-4">
+                        <h2 class="text-xl font-bold text-blue-600 border-b-2 border-blue-200 pb-2 mb-4">Education</h2>
+                        <div>
+                            <h3 class="font-semibold">Bachelor of Science : Computer science and Data Analysis</h3>
+                            <p class="text-gray-600 text-sm">Indian institute of technology, Patna | 2025 - 2029</p>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Gemini API Modal -->
+    <div id="geminiModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">✨ AI Cover Letter Assistant</h2>
+                <button id="closeGeminiModal" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div class="flex-grow overflow-y-auto pr-2">
+                <label for="jobDescription" class="block text-sm font-medium text-gray-700 mb-1">Paste the job description below:</label>
+                <textarea id="jobDescription" rows="6" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"></textarea>
+                
+                <div class="mt-4">
+                    <button id="generateLetter" class="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors">
+                        <span id="generateButtonText">Generate</span>
+                        <div id="loader" class="loader hidden ml-3"></div>
+                    </button>
+                </div>
+                
+                <div id="resultContainer" class="mt-4 hidden">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-800">Generated Cover Letter:</h3>
+                        <button id="copyButton" class="bg-gray-200 text-gray-700 text-sm py-1 px-3 rounded-md hover:bg-gray-300">Copy</button>
+                    </div>
+                    <div id="geminiResult" class="mt-2 p-4 bg-gray-50 border border-gray-200 rounded-md h-64 overflow-y-auto whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Modal Control ---
+        const geminiModal = document.getElementById('geminiModal');
+        const openGeminiModalBtn = document.getElementById('openGeminiModal');
+        const closeGeminiModalBtn = document.getElementById('closeGeminiModal');
+        const generateLetterBtn = document.getElementById('generateLetter');
+        const jobDescriptionTextarea = document.getElementById('jobDescription');
+        const resultContainer = document.getElementById('resultContainer');
+        const geminiResultDiv = document.getElementById('geminiResult');
+        const copyButton = document.getElementById('copyButton');
+        const loader = document.getElementById('loader');
+        const generateButtonText = document.getElementById('generateButtonText');
+
+        openGeminiModalBtn.addEventListener('click', () => geminiModal.classList.remove('hidden'));
+        closeGeminiModalBtn.addEventListener('click', () => geminiModal.classList.add('hidden'));
+        geminiModal.addEventListener('click', (e) => {
+            if (e.target === geminiModal) {
+                geminiModal.classList.add('hidden');
+            }
+        });
+
+        // --- Gemini API Call ---
+        generateLetterBtn.addEventListener('click', async () => {
+            const jobDescription = jobDescriptionTextarea.value;
+            if (!jobDescription.trim()) {
+                // In a real app, you'd show a more user-friendly message.
+                console.error("Job description is empty.");
+                jobDescriptionTextarea.focus();
+                return;
+            }
+
+            // Show loader and disable button
+            loader.classList.remove('hidden');
+            generateButtonText.textContent = 'Generating...';
+            generateLetterBtn.disabled = true;
+
+            try {
+                // 1. Gather resume data from the page
+                const resumeData = {
+                    name: document.getElementById('resume-name')?.innerText || 'The applicant',
+                    title: document.getElementById('resume-title')?.innerText || '',
+                    about: document.getElementById('resume-about')?.innerText || '',
+                    projects: document.getElementById('resume-projects')?.innerText || '',
+                    skills: document.getElementById('resume-skills')?.innerText || ''
+                };
+
+                // 2. Construct the prompt
+                const prompt = `
+                    Based on the following resume information and job description, write a professional and enthusiastic cover letter. The tone should be confident but not arrogant. Personalize it as much as possible, connecting the applicant's skills and experience directly to the requirements in the job description.
+
+                    **Resume Information:**
+                    - Name: ${resumeData.name}
+                    - Current Role/Title: ${resumeData.title}
+                    - About Me Section: ${resumeData.about}
+                    - Projects Section: ${resumeData.projects}
+                    - Skills Section: ${resumeData.skills}
+
+                    **Job Description:**
+                    ${jobDescription}
+
+                    Please structure the letter with a clear introduction, body paragraphs highlighting key qualifications, and a strong closing. Do not include placeholders like "[Your Name]" or "[Company Name]"; write it as if ${resumeData.name} is sending it directly.
+                `;
+
+                // 3. Call the Gemini API with exponential backoff
+                const resultText = await callGeminiWithBackoff(prompt);
+
+                // 4. Display the result
+                geminiResultDiv.textContent = resultText;
+                resultContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error generating cover letter:', error);
+                geminiResultDiv.textContent = 'Sorry, an error occurred while generating the cover letter. Please check the console for details and try again.';
+                resultContainer.classList.remove('hidden');
+            } finally {
+                // Hide loader and re-enable button
+                loader.classList.add('hidden');
+                generateButtonText.textContent = 'Generate';
+                generateLetterBtn.disabled = false;
+            }
+        });
+
+        // --- API Fetch Function with Exponential Backoff ---
+        async function callGeminiWithBackoff(prompt, maxRetries = 3) {
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            
+            let delay = 1000; // Start with 1 second
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        return result.candidates[0].content.parts[0].text;
+                    } else {
+                        throw new Error('Invalid response structure from Gemini API');
+                    }
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed. Retrying in ${delay / 1000}s...`, error);
+                    if (i === maxRetries - 1) throw error; // Throw error on last attempt
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; // Double the delay for the next retry
+                }
+            }
+        }
+
+        // --- Copy to Clipboard ---
+        copyButton.addEventListener('click', () => {
+            const textToCopy = geminiResultDiv.textContent;
+            
+            // A temporary textarea is created to hold the text,
+            // allowing the copy command to work.
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => { copyButton.textContent = 'Copy'; }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                copyButton.textContent = 'Error';
+                 setTimeout(() => { copyButton.textContent = 'Copy'; }, 2000);
+            }
+            document.body.removeChild(textArea);
+        });
+
+    </script>
+</body>
+</html>
